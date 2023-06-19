@@ -45,17 +45,23 @@ namespace Playlist.Controllers
         }
 
         // POST: Song/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ID,Title,AlbumID")] Song song)
+        public ActionResult Create([Bind(Include = "Title,AlbumID")] Song song)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.Songs.Add(song);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                if (ModelState.IsValid)
+                {
+                    db.Songs.Add(song);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             ViewBag.AlbumID = new SelectList(db.Albums, "ID", "Title", song.AlbumID);
