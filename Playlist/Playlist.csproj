@@ -129,6 +129,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AlbumController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\SingerController.cs" />
     <Compile Include="Controllers\SongController.cs" />
     <Compile Include="DAL\PlaylistContext.cs" />
     <Compile Include="DAL\PlaylistInitializer.cs" />
@@ -199,6 +200,11 @@
     <Content Include="Views\Album\Details.cshtml" />
     <Content Include="Views\Album\Edit.cshtml" />
     <Content Include="Views\Album\Index.cshtml" />
+    <Content Include="Views\Singer\Create.cshtml" />
+    <Content Include="Views\Singer\Delete.cshtml" />
+    <Content Include="Views\Singer\Details.cshtml" />
+    <Content Include="Views\Singer\Edit.cshtml" />
+    <Content Include="Views\Singer\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
