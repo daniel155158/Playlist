@@ -4,12 +4,19 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
 <div>
-    <h4>Song</h4>
+    <h4>@Html.DisplayNameFor(model => model.Title)</h4>
+    <h4>@Html.DisplayFor(model => model.Title)</h4>
     <hr />
     <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Album.Singer.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Album.Singer.Name)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Album.Title)
         </dt>
@@ -17,15 +24,6 @@
         <dd>
             @Html.DisplayFor(model => model.Album.Title)
         </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Title)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Title)
-        </dd>
-
     </dl>
 </div>
 <p>
