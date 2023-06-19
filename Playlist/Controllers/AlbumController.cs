@@ -85,20 +85,30 @@ namespace Playlist.Controllers
         }
 
         // POST: Album/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ID,Title,ReleaseDate,SingerID")] Album album)
+        public ActionResult EditPost(int? id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(album).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ViewBag.SingerID = new SelectList(db.Singers, "ID", "Name", album.SingerID);
-            return View(album);
+            var albumToUpdate = db.Albums.Find(id);
+            if (TryUpdateModel(albumToUpdate, "",
+                new string[] { "Title", "ReleaseDate", "SingerID" }))
+            {
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (DataException /* dex */)
+                {
+                    //Log the error (uncomment dex variable name and add a line here to write a log.
+                    ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                }
+            }
+            return View(albumToUpdate);
         }
 
         // GET: Album/Delete/5
