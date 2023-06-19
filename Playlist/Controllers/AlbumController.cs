@@ -18,7 +18,7 @@ namespace Playlist.Controllers
         // GET: Album
         public ActionResult Index()
         {
-            var albums = db.Albums.Include(a => a.Singer);
+            var albums = db.Albums.Include(album => album.Singer);
             return View(albums.ToList());
         }
 
