@@ -8,6 +8,8 @@ namespace Playlist.Models
         public int ID { get; set; }
         public string Name { get; set; }
 
+        // one singer has many albums
+        public virtual ICollection<Album> Albums { get; set; }
         // one singer has many songs
         public virtual ICollection<Song> Songs { get; set; }
     }
