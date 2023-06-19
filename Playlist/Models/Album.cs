@@ -11,6 +11,9 @@ namespace Playlist.Models
 
         [Display(Name = "專輯名稱")]
         public string Title { get; set; }
+        
+        [Display(Name = "發行日期"), DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime ReleaseDate { get; set; }
         public int SingerID { get; set; }
 
